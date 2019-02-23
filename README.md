@@ -39,4 +39,13 @@ In the above example, obviously it would be easier to just put this on your page
 
 So what is this plugin for??
 
-Mainly the narrow use-case where your data or site configuration needs to contain references to variables, but in a string form, so that they can be dynamically looked-up according to some dynamic switch, like the language of the current page, for example.
+Suppose that "foo.bar" was an unknown string, contained within a site configuration variable in `_config.yml`, like:
+```
+my_var: "foo.bar"
+```
+If your goal is to get the contents of `site.data.foo.bar`, then you'll need something like this plugin, because `{{ site.data[site.myvar] }}` will not work.
+
+Using this plugin, you would get at the contents of `site.data.foo.bar` by using:
+```
+{{ site.my_var | drill: site.data }}
+```
